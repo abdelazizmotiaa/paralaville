@@ -319,6 +319,80 @@ export const App: React.FC = () => {
             </div>
           </div>
 
+          {/* Mobile Swipeable Quick Category Filter Bar */}
+          <div className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar py-2.5 -mx-4 px-4 border-b border-slate-100 mb-2">
+            <button
+              onClick={() => setSelectedCategory('all')}
+              className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+                selectedCategory === 'all'
+                  ? 'bg-rose-700 text-white shadow-xs'
+                  : 'bg-white text-slate-700 border border-slate-200'
+              }`}
+            >
+              Tous ({PRODUCTS.length})
+            </button>
+            <button
+              onClick={() => setSelectedCategory('destockage')}
+              className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-black transition-all ${
+                selectedCategory === 'destockage'
+                  ? 'bg-red-600 text-white shadow-xs'
+                  : 'bg-red-50 text-red-600 border border-red-200'
+              }`}
+            >
+              🔥 SOLDES -50%
+            </button>
+            <button
+              onClick={() => setSelectedCategory('complements')}
+              className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+                selectedCategory === 'complements'
+                  ? 'bg-rose-600 text-white shadow-xs'
+                  : 'bg-rose-50 text-rose-700 border border-rose-200'
+              }`}
+            >
+              ✨ Compléments
+            </button>
+            <button
+              onClick={() => setSelectedCategory('solaires')}
+              className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+                selectedCategory === 'solaires'
+                  ? 'bg-amber-500 text-white shadow-xs'
+                  : 'bg-amber-50 text-amber-800 border border-amber-200'
+              }`}
+            >
+              ☀️ Solaires
+            </button>
+            <button
+              onClick={() => setSelectedCategory('cheveux')}
+              className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+                selectedCategory === 'cheveux'
+                  ? 'bg-slate-900 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-700'
+              }`}
+            >
+              💆 Cheveux
+            </button>
+            <button
+              onClick={() => setSelectedCategory('bebe-maternite')}
+              className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+                selectedCategory === 'bebe-maternite'
+                  ? 'bg-sky-600 text-white shadow-xs'
+                  : 'bg-sky-50 text-sky-800 border border-sky-200'
+              }`}
+            >
+              👶 Bébé
+            </button>
+            <button
+              onClick={() => setSelectedCategory('packs-promo')}
+              className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+                selectedCategory === 'packs-promo'
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+              }`}
+            >
+              🎁 Packs
+            </button>
+          </div>
+
           {/* Product Grid */}
           {filteredProducts.length === 0 ? (
             <div className="py-16 text-center space-y-4">
@@ -341,7 +415,7 @@ export const App: React.FC = () => {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6 mt-4 sm:mt-6">
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}

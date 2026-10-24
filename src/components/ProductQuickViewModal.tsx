@@ -38,25 +38,27 @@ export const ProductQuickViewModal: React.FC<ProductQuickViewModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fade-in">
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0"
         onClick={onClose}
       />
 
-      <div className="min-h-full flex items-center justify-center p-3 sm:p-4 text-center">
-        <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden text-left animate-fadeIn">
-          
-          {/* Close Button */}
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 z-20 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
-            aria-label="Fermer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+      <div className="relative w-full max-w-2xl bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden text-left animate-fadeIn z-10 max-h-[92vh] flex flex-col">
+        {/* Mobile Drag Indicator Bar */}
+        <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto my-2 sm:hidden shrink-0" />
+        
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 z-20 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
+          aria-label="Fermer"
+        >
+          <X className="w-5 h-5" />
+        </button>
 
+        <div className="overflow-y-auto flex-1">
           <div className="grid grid-cols-1 md:grid-cols-2">
             
             {/* Left: Product Image */}

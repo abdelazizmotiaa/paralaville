@@ -112,78 +112,82 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fade-in">
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0"
         onClick={onClose}
       />
 
-      <div className="min-h-full flex items-center justify-center p-3 sm:p-4 text-center">
-        <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden text-left animate-fadeIn">
+      <div className="relative w-full max-w-lg bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden text-left animate-fadeIn z-10 max-h-[92vh] flex flex-col">
+        {/* Mobile Drag Indicator Bar */}
+        <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto my-2 sm:hidden shrink-0" />
           
-          {/* Close button */}
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 z-10 p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
-            aria-label="Fermer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 z-10 p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+          aria-label="Fermer"
+        >
+          <X className="w-5 h-5" />
+        </button>
 
-          {!orderConfirmed ? (
-            /* --- ORDER FORM (3 Zero-friction fields) --- */
-            <div>
-              {/* Header */}
-              <div className="p-5 border-b border-slate-100 bg-gradient-to-r from-pharmacy-800 to-pharmacy-900 text-white">
-                <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  Commande Express 1-Étape
-                </span>
-                <h3 className="text-lg font-bold font-serif text-white mt-1">
-                  Paiement à la Livraison (Cash on Delivery)
-                </h3>
-                <p className="text-xs text-pharmacy-200 mt-0.5">
-                  Aucun paiement en ligne requis • Réglez en espèces à la réception de votre colis.
-                </p>
+        {!orderConfirmed ? (
+          /* --- ORDER FORM (3 Zero-friction fields) --- */
+          <div className="overflow-y-auto flex-1 flex flex-col pb-safe">
+            {/* Header */}
+            <div className="p-4 sm:p-5 border-b border-slate-100 bg-gradient-to-r from-pharmacy-800 to-pharmacy-900 text-white shrink-0">
+              <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                Commande Express 1-Étape
+              </span>
+              <h3 className="text-base sm:text-lg font-bold font-serif text-white mt-1">
+                Paiement à la Livraison (Cash on Delivery)
+              </h3>
+              <p className="text-xs text-pharmacy-200 mt-0.5">
+                Aucun paiement en ligne requis • Réglez en espèces à la réception de votre colis.
+              </p>
+            </div>
+
+            {/* Form Content */}
+            <form onSubmit={handleSubmitOrder} className="p-4 sm:p-5 space-y-4 flex-1">
+              
+              {/* Field 1: Nom complet */}
+              <div>
+                <label className="block text-xs font-bold text-slate-800 mb-1">
+                  1. Nom & Prénom <span className="text-red-500">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    required
+                    autoComplete="name"
+                    placeholder="Ex: Fatima Zahra El Idrissi"
+                    value={formData.fullName}
+                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                    className="w-full pl-9 pr-3 py-3 sm:py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 focus:bg-white"
+                  />
+                  <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                </div>
               </div>
 
-              {/* Form Content */}
-              <form onSubmit={handleSubmitOrder} className="p-5 space-y-4">
-                
-                {/* Field 1: Nom complet */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-800 mb-1">
-                    1. Nom & Prénom <span className="text-red-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      required
-                      placeholder="Ex: Fatima Zahra El Idrissi"
-                      value={formData.fullName}
-                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 focus:bg-white"
-                    />
-                    <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                  </div>
+              {/* Field 2: Téléphone WhatsApp */}
+              <div>
+                <label className="block text-xs font-bold text-slate-800 mb-1">
+                  2. Numéro de Téléphone (WhatsApp) <span className="text-red-500">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    required
+                    placeholder="Ex: 06 71 58 11 67 ou 06 XX XX XX XX"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full pl-9 pr-3 py-3 sm:py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 focus:bg-white"
+                  />
+                  <Phone className="w-4 h-4 text-emerald-600 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
-
-                {/* Field 2: Téléphone WhatsApp */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-800 mb-1">
-                    2. Numéro de Téléphone (WhatsApp) <span className="text-red-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="tel"
-                      required
-                      placeholder="Ex: 06 71 58 11 67 ou 06 XX XX XX XX"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 focus:bg-white"
-                    />
-                    <Phone className="w-4 h-4 text-emerald-600 absolute left-3 top-1/2 -translate-y-1/2" />
-                  </div>
                   <p className="text-[10px] text-slate-400 mt-1">
                     Dr. Khaoula Kamal vous enverra la confirmation et le suivi de livraison sur ce numéro.
                   </p>
@@ -347,6 +351,5 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
         </div>
       </div>
-    </div>
   );
 };

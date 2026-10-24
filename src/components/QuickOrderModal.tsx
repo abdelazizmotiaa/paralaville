@@ -83,27 +83,33 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 animate-fade-in">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fade-in">
+      {/* Background touch dismiss */}
+      <div className="fixed inset-0" onClick={onClose} />
+
       <div 
-        className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-100 overflow-hidden relative"
+        className="bg-white rounded-t-3xl sm:rounded-3xl max-w-lg w-full shadow-2xl border border-slate-100 overflow-hidden relative z-10 max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Mobile Drag Indicator Bar */}
+        <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto my-2 sm:hidden shrink-0" />
+
         {/* Header */}
-        <div className="bg-gradient-to-r from-emerald-800 to-pharmacy-800 text-white p-5 relative">
+        <div className="bg-gradient-to-r from-emerald-800 to-pharmacy-800 text-white p-4 sm:p-5 relative shrink-0">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+            className="absolute top-3 sm:top-4 right-3 sm:right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 text-white flex items-center justify-center transition-colors"
             aria-label="Fermer"
           >
             <X className="w-5 h-5" />
           </button>
 
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold-400 text-slate-900 text-[10px] font-extrabold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold-400 text-slate-900 text-[10px] font-extrabold uppercase tracking-wider mb-1.5">
             <Sparkles className="w-3 h-3" />
             <span>Commande Express 1-Clic</span>
           </div>
 
-          <h2 className="text-lg sm:text-xl font-black font-serif tracking-tight">
+          <h2 className="text-base sm:text-xl font-black font-serif tracking-tight">
             Commander & Payer à la Livraison
           </h2>
           <p className="text-xs text-emerald-100 mt-0.5">
@@ -112,7 +118,7 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
         </div>
 
         {/* Content Form */}
-        <form onSubmit={handleConfirmOrder} className="p-5 sm:p-6 space-y-4 max-h-[75vh] overflow-y-auto">
+        <form onSubmit={handleConfirmOrder} className="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1 pb-safe">
           {/* Product Mini Preview */}
           <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-200">
             <div className="w-16 h-16 rounded-xl bg-white p-1 border border-slate-100 flex items-center justify-center shrink-0">
@@ -166,10 +172,11 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
               <div className="relative">
                 <input
                   type="text"
+                  autoComplete="name"
                   placeholder="Ex: Fatima Zahra Alami"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className={`w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border rounded-xl focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 ${
+                  className={`w-full pl-9 pr-3 py-3 sm:py-2.5 text-sm bg-slate-50 border rounded-xl focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 ${
                     errors.fullName ? 'border-red-500' : 'border-slate-200'
                   }`}
                 />
@@ -186,10 +193,12 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
               <div className="relative">
                 <input
                   type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   placeholder="Ex: 06 71 23 45 67"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className={`w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border rounded-xl focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 ${
+                  className={`w-full pl-9 pr-3 py-3 sm:py-2.5 text-sm bg-slate-50 border rounded-xl focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 ${
                     errors.phone ? 'border-red-500' : 'border-slate-200'
                   }`}
                 />
@@ -208,7 +217,7 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                   <select
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 appearance-none font-semibold cursor-pointer"
+                    className="w-full pl-9 pr-3 py-3 sm:py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 appearance-none font-semibold cursor-pointer"
                   >
                     <option value="Midelt">⭐ Midelt (Livraison Express Gratuite)</option>
                     {MOROCCAN_CITIES.filter((c) => c.name !== 'Midelt').map((c) => (
@@ -228,10 +237,11 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                 </label>
                 <input
                   type="text"
+                  autoComplete="street-address"
                   placeholder="Ex: Hay Al Qods, Rue 5..."
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  className={`w-full px-3 py-2 text-xs bg-slate-50 border rounded-xl focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 ${
+                  className={`w-full px-3 py-3 sm:py-2.5 text-sm bg-slate-50 border rounded-xl focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 ${
                     errors.address ? 'border-red-500' : 'border-slate-200'
                   }`}
                 />

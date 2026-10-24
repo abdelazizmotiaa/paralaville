@@ -256,30 +256,121 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Expandable Mobile Search Bar */}
-        {isSearchExpandedMobile && (
-          <div className="md:hidden pb-3 pt-1 animate-fadeIn">
-            <div className="relative w-full">
-              <input
-                type="text"
-                autoFocus
-                placeholder="Rechercher par produit, marque, ingrédient..."
-                value={searchQuery}
-                onChange={(e) => onSearchChange(e.target.value)}
-                className="w-full pl-9 pr-8 py-2 text-xs bg-slate-100 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-pharmacy-500 focus:bg-white"
-              />
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-              {searchQuery && (
-                <button
-                  onClick={() => onSearchChange('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
+        {/* Mobile Search Bar with 1-Tap Popular Chips & Live Dropdown */}
+        <div className="md:hidden pb-2.5 pt-0.5">
+          <div className="relative w-full">
+            <input
+              type="text"
+              placeholder="Rechercher soin, collagène, solaire, marque..."
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              className="w-full pl-9 pr-8 py-2 text-sm bg-slate-100/90 border border-slate-200/90 rounded-full focus:outline-hidden focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-800 placeholder-slate-400 transition-all"
+            />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            {searchQuery && (
+              <button
+                onClick={() => onSearchChange('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+                aria-label="Effacer"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          {/* 1-Tap Popular Search Pills on Mobile */}
+          {!searchQuery && (
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2 text-[11px]">
+              <span className="text-[10px] text-slate-400 font-semibold shrink-0">Populaire :</span>
+              <button
+                onClick={() => onSelectCategory('destockage')}
+                className="shrink-0 px-2.5 py-0.5 rounded-full bg-red-50 text-red-600 font-black border border-red-200 active:scale-95 transition-transform"
+              >
+                🔥 Soldes -50%
+              </button>
+              <button
+                onClick={() => onSearchChange('Collagène')}
+                className="shrink-0 px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-700 font-bold border border-rose-200 active:scale-95 transition-transform"
+              >
+                ✨ Collagène
+              </button>
+              <button
+                onClick={() => onSearchChange('Forcapil')}
+                className="shrink-0 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 font-bold border border-amber-200 active:scale-95 transition-transform"
+              >
+                💆 Anti-chute
+              </button>
+              <button
+                onClick={() => onSearchChange('Solaire')}
+                className="shrink-0 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium active:scale-95 transition-transform"
+              >
+                ☀️ Solaire
+              </button>
+              <button
+                onClick={() => onSearchChange('CeraVe')}
+                className="shrink-0 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium active:scale-95 transition-transform"
+              >
+                CeraVe
+              </button>
+            </div>
+          )}
+
+          {/* Mobile Live Autocomplete Dropdown */}
+          {searchQuery.trim().length > 1 && (
+            <div className="mt-2 bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+              {searchResults.length > 0 ? (
+                <div className="p-2 space-y-1 max-h-64 overflow-y-auto">
+                  <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    Produits ({searchResults.length})
+                  </div>
+                  {searchResults.map((product) => (
+                    <div
+                      key={product.id}
+                      onClick={() => {
+                        onQuickViewProduct(product);
+                      }}
+                      className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-slate-50 active:bg-slate-100 cursor-pointer"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-slate-100 p-1 flex items-center justify-center shrink-0">
+                        <img
+                          src={product.image}
+                          alt={product.title}
+                          className="max-h-full max-w-full object-contain"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[9px] font-bold text-rose-700 uppercase">
+                          {product.brand}
+                        </div>
+                        <div className="text-xs font-semibold text-slate-900 truncate">
+                          {product.title}
+                        </div>
+                      </div>
+                      <div className="text-xs font-black text-slate-900 shrink-0">
+                        {product.price} <span className="text-[10px] text-emerald-700 font-bold">DH</span>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="pt-1 border-t border-slate-100 text-center">
+                    <button
+                      onClick={() => {
+                        const el = document.getElementById('catalogue-produits');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="text-xs font-bold text-rose-700 py-1 block w-full"
+                    >
+                      Voir les résultats dans le catalogue ↓
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="p-3 text-center text-xs text-slate-500">
+                  Aucun résultat pour « {searchQuery} »
+                </div>
               )}
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       {/* Desktop Quick Category Subheader */}

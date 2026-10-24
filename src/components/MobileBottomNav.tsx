@@ -44,10 +44,10 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           onClick={onOpenPrescriptionModal}
           className="flex flex-col items-center justify-center -mt-4 active:scale-95 transition-transform"
         >
-          <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-pharmacy-700 to-pharmacy-500 text-white flex items-center justify-center shadow-lg shadow-pharmacy-700/30 border-2 border-white">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-rose-700 via-rose-600 to-pink-500 text-white flex items-center justify-center shadow-lg shadow-rose-600/30 border-2 border-white">
             <Camera className="w-5 h-5" />
           </div>
-          <span className="text-[9px] font-bold text-pharmacy-800 mt-0.5">Ordonnance</span>
+          <span className="text-[9px] font-bold text-rose-800 mt-0.5">Ordonnance</span>
         </button>
 
         {/* 4. Panier */}
