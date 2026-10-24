@@ -25,6 +25,7 @@ interface MobileDrawerProps {
   onClose: () => void;
   onSelectCategory: (categoryId: string) => void;
   onOpenPrescriptionModal: () => void;
+  onOpenDiagnosticModal?: () => void;
   onScrollToSection: (sectionId: string) => void;
   selectedCategory: string;
 }
@@ -34,6 +35,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   onClose,
   onSelectCategory,
   onOpenPrescriptionModal,
+  onOpenDiagnosticModal,
   onScrollToSection,
   selectedCategory,
 }) => {
@@ -143,6 +145,28 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             <X className="w-5 h-5" />
           </button>
         </div>
+
+        {/* Diagnostic Peau Quick CTA */}
+        {onOpenDiagnosticModal && (
+          <div className="px-3 pt-3">
+            <button
+              onClick={() => {
+                onClose();
+                onOpenDiagnosticModal();
+              }}
+              className="w-full p-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl shadow-xs flex items-center justify-between active:scale-95 transition-all text-left"
+            >
+              <div className="flex items-center gap-2.5">
+                <Sparkles className="w-4 h-4 text-white animate-spin-slow" />
+                <div>
+                  <div className="text-xs font-black">Diagnostic Peau Express</div>
+                  <div className="text-[10px] text-amber-100">Routine sur-mesure en 30s</div>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-white" />
+            </button>
+          </div>
+        )}
 
         {/* Prescription Quick Action Banner in Drawer */}
         <div className="p-3 bg-gradient-to-r from-pharmacy-800 to-pharmacy-700 text-white m-3 rounded-xl shadow-sm">

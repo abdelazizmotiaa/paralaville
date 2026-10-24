@@ -30,6 +30,9 @@ import { ProductQuickViewModal } from './components/ProductQuickViewModal';
 import { CartDrawer } from './components/CartDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { PrescriptionModal } from './components/PrescriptionModal';
+import { SkinDiagnosticModal } from './components/SkinDiagnosticModal';
+import { QuickOrderModal } from './components/QuickOrderModal';
+import { CustomerReviewsSection } from './components/CustomerReviewsSection';
 import { DoctorKhaoulaSection } from './components/DoctorKhaoulaSection';
 import { MideltPharmacySection } from './components/MideltPharmacySection';
 import { TrustBadgesSection } from './components/TrustBadgesSection';
@@ -61,7 +64,9 @@ export const App: React.FC = () => {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isPrescriptionModalOpen, setIsPrescriptionModalOpen] = useState(false);
+  const [isDiagnosticModalOpen, setIsDiagnosticModalOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [quickOrderProduct, setQuickOrderProduct] = useState<Product | null>(null);
 
   // Filters & Search state
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -188,6 +193,8 @@ export const App: React.FC = () => {
         onOpenCart={() => setIsCartOpen(true)}
         onOpenMobileDrawer={() => setIsMobileDrawerOpen(true)}
         onOpenPrescriptionModal={() => setIsPrescriptionModalOpen(true)}
+        onOpenDiagnosticModal={() => setIsDiagnosticModalOpen(true)}
+        onQuickViewProduct={(p) => setQuickViewProduct(p)}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         selectedCategory={selectedCategory}
@@ -201,6 +208,7 @@ export const App: React.FC = () => {
         onClose={() => setIsMobileDrawerOpen(false)}
         onSelectCategory={setSelectedCategory}
         onOpenPrescriptionModal={() => setIsPrescriptionModalOpen(true)}
+        onOpenDiagnosticModal={() => setIsDiagnosticModalOpen(true)}
         onScrollToSection={scrollToSection}
         selectedCategory={selectedCategory}
       />
@@ -330,6 +338,7 @@ export const App: React.FC = () => {
                   product={product}
                   onAddToCart={(p) => handleAddToCart(p, 1)}
                   onQuickView={(p) => setQuickViewProduct(p)}
+                  onQuickOrder={(p) => setQuickOrderProduct(p)}
                   isAddedToCart={addedProductId === product.id}
                 />
               ))}
@@ -341,14 +350,17 @@ export const App: React.FC = () => {
         {/* 10. Doctor Khaoula Kamal Section */}
         <DoctorKhaoulaSection />
 
-        {/* 11. Midelt Pharmacy & Service de Garde */}
+        {/* 11. Moroccan Customer Verified Reviews */}
+        <CustomerReviewsSection />
+
+        {/* 12. Midelt Pharmacy & Service de Garde */}
         <MideltPharmacySection />
 
-        {/* 12. Trust Badges Section */}
+        {/* 13. Trust Badges Section */}
         <TrustBadgesSection />
       </main>
 
-      {/* 13. Footer */}
+      {/* 14. Footer */}
       <Footer
         onSelectCategory={(cat) => {
           setSelectedCategory(cat);
@@ -358,10 +370,10 @@ export const App: React.FC = () => {
         onOpenPrescriptionModal={() => setIsPrescriptionModalOpen(true)}
       />
 
-      {/* 14. Persistent Floating WhatsApp Button */}
+      {/* 15. Persistent Floating WhatsApp Button */}
       <FloatingWhatsApp />
 
-      {/* 15. Mobile App Bottom Bar (Visible on mobile only) */}
+      {/* 16. Mobile App Bottom Bar (Visible on mobile only) */}
       <MobileBottomNav
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
@@ -380,6 +392,19 @@ export const App: React.FC = () => {
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}
         onAddToCart={handleAddToCart}
+      />
+
+      <QuickOrderModal
+        product={quickOrderProduct}
+        isOpen={!!quickOrderProduct}
+        onClose={() => setQuickOrderProduct(null)}
+      />
+
+      <SkinDiagnosticModal
+        isOpen={isDiagnosticModalOpen}
+        onClose={() => setIsDiagnosticModalOpen(false)}
+        onAddToCart={handleAddToCart}
+        onOpenQuickView={(p) => setQuickViewProduct(p)}
       />
 
       <CartDrawer

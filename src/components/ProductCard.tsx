@@ -7,15 +7,16 @@ import {
   Eye, 
   Check, 
   ShieldCheck, 
-  Stethoscope 
+  Stethoscope,
+  Zap
 } from 'lucide-react';
 import { Product } from '../types';
-import { buildSingleProductWhatsAppUrl } from '../utils/whatsapp';
 
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
   onQuickView: (product: Product) => void;
+  onQuickOrder?: (product: Product) => void;
   isAddedToCart?: boolean;
 }
 
@@ -23,6 +24,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onAddToCart,
   onQuickView,
+  onQuickOrder,
   isAddedToCart = false,
 }) => {
   const discount = product.discountPercent || 
@@ -178,19 +180,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </span>
           </div>
 
-          {/* High-Converting Action Buttons: 1-Click WhatsApp & Add to Cart */}
+          {/* High-Converting Action Buttons: 1-Click WhatsApp Quick Order & Add to Cart */}
           <div className="grid grid-cols-2 gap-2">
-            {/* 1-Click WhatsApp Direct Order */}
-            <a
-              href={buildSingleProductWhatsAppUrl(product, 1)}
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* 1-Click WhatsApp Modal Trigger */}
+            <button
+              onClick={() => onQuickOrder ? onQuickOrder(product) : onQuickView(product)}
               className="flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-xs active:scale-95 transition-all group/btn"
               title="Commander immédiatement cet article via WhatsApp"
             >
               <MessageCircle className="w-3.5 h-3.5 fill-current shrink-0 group-hover/btn:scale-110 transition-transform" />
-              <span className="truncate">WhatsApp</span>
-            </a>
+              <span className="truncate">Commander</span>
+            </button>
 
             {/* Add to Cart */}
             <button
