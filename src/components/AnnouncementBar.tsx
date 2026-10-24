@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Truck, ShieldCheck, Clock, Instagram, PhoneCall } from 'lucide-react';
+import { Truck, ShieldCheck, Clock, Instagram, PhoneCall, Gift, CheckCircle2 } from 'lucide-react';
 import { DISPLAY_PHONE, WHATSAPP_PHONE } from '../utils/whatsapp';
 
 const ANNOUNCEMENTS = [
   {
     icon: Truck,
-    text: '✨ Livraison Express sur Midelt (le jour même) & Partout au Maroc (24-48h) — Paiement à la livraison',
+    text: '🚚 LIVRAISON GRATUITE : dès 150 DH à Midelt & dès 399 DH partout au Maroc !',
   },
   {
     icon: ShieldCheck,
-    text: '🩺 Gérée par Dr. Khaoula Kamal — Produits 100% Authentiques & Direct Laboratoires',
+    text: '💵 PAIEMENT À LA LIVRAISON (Espèces) : Vous vérifiez vos soins avant de payer !',
   },
   {
-    icon: Clock,
-    text: '🚚 Livraison Gratuite à Midelt à partir de 200 DH | National dès 500 DH',
+    icon: Gift,
+    text: '🎁 CADEAU OFFERT : Échantillons dermatologiques inclus dans chaque commande !',
+  },
+  {
+    icon: CheckCircle2,
+    text: '🩺 100% PRODUITS AUTHENTIQUES : Agréés et contrôlés par Dr. Khaoula Kamal',
   },
 ];
 
@@ -23,7 +27,7 @@ export const AnnouncementBar: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % ANNOUNCEMENTS.length);
-    }, 4500);
+    }, 4000);
     return () => clearInterval(timer);
   }, []);
 
@@ -31,26 +35,26 @@ export const AnnouncementBar: React.FC = () => {
   const Icon = current.icon;
 
   return (
-    <div className="bg-gradient-to-r from-pharmacy-800 via-pharmacy-700 to-pharmacy-900 text-white text-xs py-2 px-3 border-b border-pharmacy-600/30">
+    <div className="bg-gradient-to-r from-emerald-950 via-pharmacy-900 to-emerald-900 text-white text-xs py-2 px-3 border-b border-emerald-600/30">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Pharmacist Badge */}
-        <div className="hidden lg:flex items-center gap-2 text-pharmacy-200">
+        <div className="hidden lg:flex items-center gap-2 text-emerald-200">
           <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span className="font-medium text-white">Pharmacie ouverte à Midelt</span>
-          <span className="text-pharmacy-400">|</span>
-          <span className="text-gold-300 font-medium">Dr. Khaoula Kamal</span>
+          <span className="font-bold text-white text-[11px]">Officine ouverte à Midelt</span>
+          <span className="text-emerald-400/60">|</span>
+          <span className="text-gold-300 font-semibold text-[11px]">Dr. Khaoula Kamal</span>
         </div>
 
         {/* Center: Rotating Announcement */}
         <div className="flex-1 flex items-center justify-center text-center transition-all duration-500 min-h-[22px]">
-          <div className="flex items-center gap-1.5 font-medium tracking-wide animate-fadeIn">
-            <Icon className="w-3.5 h-3.5 text-gold-300 shrink-0" />
-            <span className="text-slate-100 text-[11px] sm:text-xs">{current.text}</span>
+          <div className="flex items-center gap-1.5 font-bold tracking-wide animate-fadeIn">
+            <Icon className="w-4 h-4 text-gold-400 shrink-0" />
+            <span className="text-white text-[11px] sm:text-xs tracking-tight">{current.text}</span>
           </div>
         </div>
 
         {/* Right: Instagram & Direct Contact */}
-        <div className="hidden md:flex items-center gap-4 text-[11px] text-pharmacy-200 shrink-0">
+        <div className="hidden md:flex items-center gap-4 text-[11px] text-emerald-200 shrink-0">
           <a
             href="https://www.instagram.com/dr.khaoulakamal"
             target="_blank"
@@ -58,14 +62,14 @@ export const AnnouncementBar: React.FC = () => {
             className="flex items-center gap-1 hover:text-white transition-colors group"
           >
             <Instagram className="w-3.5 h-3.5 text-pink-300 group-hover:scale-110 transition-transform" />
-            <span>@dr.khaoulakamal</span>
+            <span className="font-medium">@dr.khaoulakamal</span>
           </a>
-          <span className="text-pharmacy-500">|</span>
+          <span className="text-emerald-500/60">|</span>
           <a
             href={`https://wa.me/${WHATSAPP_PHONE}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-gold-300 hover:text-white font-semibold transition-colors"
+            className="flex items-center gap-1 text-gold-300 hover:text-white font-extrabold transition-colors"
           >
             <PhoneCall className="w-3.5 h-3.5" />
             <span>{DISPLAY_PHONE}</span>

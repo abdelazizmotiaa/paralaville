@@ -32,6 +32,8 @@ import { CheckoutModal } from './components/CheckoutModal';
 import { PrescriptionModal } from './components/PrescriptionModal';
 import { SkinDiagnosticModal } from './components/SkinDiagnosticModal';
 import { QuickOrderModal } from './components/QuickOrderModal';
+import { PromoPacksSection } from './components/PromoPacksSection';
+import { LiveSalesToast } from './components/LiveSalesToast';
 import { CustomerReviewsSection } from './components/CustomerReviewsSection';
 import { DoctorKhaoulaSection } from './components/DoctorKhaoulaSection';
 import { MideltPharmacySection } from './components/MideltPharmacySection';
@@ -242,6 +244,13 @@ export const App: React.FC = () => {
           />
         </div>
 
+        {/* 7b. Winning Promo Packs & Duo Specials Section */}
+        <PromoPacksSection
+          onAddToCart={(p) => handleAddToCart(p, 1)}
+          onQuickOrder={(p) => setQuickOrderProduct(p)}
+          onQuickView={(p) => setQuickViewProduct(p)}
+        />
+
         {/* 8. Top Brands Carousel */}
         <BrandsCarousel
           selectedBrand={selectedBrand}
@@ -370,8 +379,9 @@ export const App: React.FC = () => {
         onOpenPrescriptionModal={() => setIsPrescriptionModalOpen(true)}
       />
 
-      {/* 15. Persistent Floating WhatsApp Button */}
+      {/* 15. Persistent Floating WhatsApp Button & Real-Time Sales Toast */}
       <FloatingWhatsApp />
+      <LiveSalesToast />
 
       {/* 16. Mobile App Bottom Bar (Visible on mobile only) */}
       <MobileBottomNav

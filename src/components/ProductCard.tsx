@@ -164,10 +164,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Pricing & CTA Actions */}
         <div className="mt-3 pt-3 border-t border-slate-100">
           {/* Prices in Moroccan Dirhams */}
-          <div className="flex items-baseline justify-between mb-3">
+          <div className="flex items-baseline justify-between mb-1.5">
             <div className="flex items-baseline gap-2">
-              <span className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-                {product.price} <span className="text-xs font-bold text-pharmacy-700">DH</span>
+              <span className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                {product.price} <span className="text-xs font-bold text-emerald-700">DH</span>
               </span>
               {product.originalPrice > product.price && (
                 <span className="text-xs text-slate-400 line-through">
@@ -175,9 +175,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </span>
               )}
             </div>
-            <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
-              COD Disponible
-            </span>
+            {product.originalPrice > product.price && (
+              <span className="text-[11px] font-extrabold text-red-600 bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">
+                -{product.originalPrice - product.price} DH
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center justify-between text-[10px] text-slate-500 mb-2.5">
+            <span className="text-emerald-700 font-bold">✓ En stock à Midelt</span>
+            <span className="text-slate-400">Paiement à la réception</span>
           </div>
 
           {/* High-Converting Action Buttons: 1-Click WhatsApp Quick Order & Add to Cart */}

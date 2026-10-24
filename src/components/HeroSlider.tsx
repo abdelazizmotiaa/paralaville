@@ -7,57 +7,70 @@ interface HeroSliderProps {
   onOpenPrescriptionModal: () => void;
 }
 
+interface SlideItem {
+  id: number;
+  badge: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  ctaPrimaryText: string;
+  ctaPrimaryAction: () => void;
+  ctaSecondaryText: string;
+  ctaSecondaryLink?: string;
+  ctaSecondaryAction?: () => void;
+  bgGradient: string;
+  image: string;
+  pill: string;
+}
+
 export const HeroSlider: React.FC<HeroSliderProps> = ({
   onExploreOffers,
   onOpenPrescriptionModal,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
+  const slides: SlideItem[] = [
     {
       id: 1,
-      badge: 'DOCTEUR EN PHARMACIE • DR. KHAOULA KAMAL',
-      title: 'Votre Routine Dermo-Cosmétique',
-      subtitle: 'Recommandée par Votre Pharmacienne',
-      description: 'Soins 100% certifiés issus des laboratoires dermo-cosmétiques officiels. Diagnostic et conseils pharmaceutiques gratuits adaptés au climat marocain.',
-      ctaPrimaryText: 'Profiter des Offres Spéciales',
+      badge: '🔥 GRANDES PROMOTIONS : JUSQU\'À -50% IMMÉDIAT',
+      title: 'Vos Soins Dermo-Cosmétiques',
+      subtitle: 'Au Meilleur Prix du Maroc',
+      description: 'La Roche-Posay, CeraVe, SVR, Eucerin, Bioderma 100% authentiques. Payez en espèces à la livraison après avoir vérifié votre colis.',
+      ctaPrimaryText: 'Profiter des Réductions',
       ctaPrimaryAction: onExploreOffers,
-      ctaSecondaryText: 'Conseil WhatsApp Direct',
-      ctaSecondaryLink: `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent("Bonjour Dr. Khaoula, j'aimerais avoir un conseil pour ma routine dermo-cosmétique.")}`,
+      ctaSecondaryText: 'Conseil Gratuit WhatsApp',
+      ctaSecondaryLink: `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent("Bonjour Dr. Khaoula, j'aimerais profiter des promotions et recevoir votre conseil.")}`,
       bgGradient: 'from-emerald-950 via-pharmacy-900 to-slate-900',
       image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1000&q=80',
-      pill: 'Livraison Gratuite dès 200 DH à Midelt',
+      pill: '🚚 Livraison Gratuite dès 150 DH à Midelt (le jour même)',
     },
     {
       id: 2,
-      badge: 'SERVICE RAPIDE & PERSONNALISÉ',
-      title: 'Besoin d\'un Conseil ou d\'une Ordonnance ?',
-      subtitle: 'Dr. Khaoula Kamal à Votre Écoute',
-      description: 'Prenez en photo votre ordonnance ou le produit recherché. Votre pharmacienne prépare votre commande avec soin et vous livre chez vous à Midelt ou partout au Maroc.',
-      ctaPrimaryText: 'Envoyer Mon Ordonnance',
-      ctaPrimaryAction: onOpenPrescriptionModal,
-      ctaSecondaryText: 'Discuter sur WhatsApp',
-      ctaSecondaryLink: `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent("Bonjour Dr. Khaoula, j'ai une question concernant un traitement ou un produit.")}`,
-      bgGradient: 'from-slate-950 via-pharmacy-900 to-emerald-900',
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1000&q=80',
-      pill: 'Réponse sous 15 minutes sur WhatsApp',
+      badge: '☀️ SPÉCIAL CLIMAT MAROCAIN : SOLAIRES & ANTI-TACHES',
+      title: 'Packs Duo & Coffrets Économiques',
+      subtitle: 'Le 2ème Produit à -50%',
+      description: 'Protégez votre peau du soleil intense et éliminez les taches pigmentaires avec nos protocoles dermatologiques complets à prix réduit.',
+      ctaPrimaryText: 'Voir les Packs Promo',
+      ctaPrimaryAction: onExploreOffers,
+      ctaSecondaryText: 'Diagnostic Peau Express',
+      ctaSecondaryLink: `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent("Bonjour Dr. Khaoula, j'aimerais recevoir votre diagnostic personnalisé.")}`,
+      bgGradient: 'from-amber-950 via-slate-900 to-emerald-950',
+      image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80',
+      pill: '🎁 Échantillons & Cadeaux offerts dans chaque colis',
     },
     {
       id: 3,
-      badge: 'OUVERTURE À MIDELT • NOUVEAU',
-      title: 'Votre Nouvelle Pharmacie & Parapharmacie',
-      subtitle: 'Au Cœur de Midelt',
-      description: 'Retrouvez toutes vos marques favorites : La Roche-Posay, CeraVe, SVR, Mustela, Bioderma, Vichy. Bénéficiez de prix de lancement et du paiement à la livraison sans risque.',
-      ctaPrimaryText: 'Voir le Catalogue Déstockage',
-      ctaPrimaryAction: onExploreOffers,
-      ctaSecondaryText: 'Localiser la Pharmacie',
-      ctaSecondaryAction: () => {
-        const el = document.getElementById('pharmacie-midelt');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      },
-      bgGradient: 'from-emerald-900 via-teal-950 to-slate-950',
-      image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80',
-      pill: 'Centre-ville Midelt • Livraison le jour même',
+      badge: '🩺 PHARMACIE PHYSIQUE À MIDELT • SERVICE D\'ORDONNANCE',
+      title: 'Besoin d\'un Médicament ou d\'un Conseil ?',
+      subtitle: 'Dr. Khaoula Kamal à Votre Écoute',
+      description: 'Envoyez la photo de votre ordonnance médicale sur WhatsApp. Votre pharmacienne prépare tout et vous livre à domicile en 2h à Midelt ou en 24-48h au Maroc.',
+      ctaPrimaryText: 'Envoyer Mon Ordonnance',
+      ctaPrimaryAction: onOpenPrescriptionModal,
+      ctaSecondaryText: 'Discuter avec Dr. Khaoula',
+      ctaSecondaryLink: `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent("Bonjour Dr. Khaoula, j'ai une question concernant un traitement ou un produit.")}`,
+      bgGradient: 'from-slate-950 via-pharmacy-900 to-emerald-900',
+      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1000&q=80',
+      pill: '⚡ Réponse rapide garantie par Dr. Khaoula Kamal',
     },
   ];
 
