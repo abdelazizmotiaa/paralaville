@@ -11,6 +11,7 @@ import {
   MapPin, 
   Phone, 
   Instagram, 
+  Youtube,
   MessageCircle, 
   Sun, 
   Scissors,
@@ -18,7 +19,20 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { Logo } from './Logo';
-import { DISPLAY_PHONE, WHATSAPP_PHONE } from '../utils/whatsapp';
+import { 
+  DISPLAY_PHONE, 
+  WHATSAPP_PHONE, 
+  INSTAGRAM_URL, 
+  TIKTOK_URL, 
+  YOUTUBE_URL, 
+  GOOGLE_MAPS_SHARE_URL 
+} from '../utils/whatsapp';
+
+const TikTokIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.47 6.28 6.28 0 0 0 1.94-4.47V8.4a8.3 8.3 0 0 0 4.83 1.54v-3.25Z" />
+  </svg>
+);
 
 interface MobileDrawerProps {
   isOpen: boolean;
@@ -293,34 +307,64 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-1.5">
             <a
-              href="https://www.instagram.com/dr.khaoulakamal"
+              href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-pink-50 text-pink-700 text-xs font-semibold hover:bg-pink-100 transition-colors"
+              className="flex flex-col items-center justify-center py-2 px-1 rounded-lg bg-pink-50 text-pink-700 text-[11px] font-semibold hover:bg-pink-100 transition-colors"
             >
-              <Instagram className="w-3.5 h-3.5" />
+              <Instagram className="w-4 h-4 mb-0.5 text-pink-600" />
               <span>Instagram</span>
             </a>
             <a
-              href={`https://wa.me/${WHATSAPP_PHONE}`}
+              href={TIKTOK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors"
+              className="flex flex-col items-center justify-center py-2 px-1 rounded-lg bg-slate-900 text-white text-[11px] font-semibold hover:bg-slate-800 transition-colors"
             >
-              <MessageCircle className="w-3.5 h-3.5" />
-              <span>WhatsApp</span>
+              <TikTokIcon className="w-4 h-4 mb-0.5 text-white" />
+              <span>TikTok</span>
+            </a>
+            <a
+              href={YOUTUBE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center justify-center py-2 px-1 rounded-lg bg-red-50 text-red-600 text-[11px] font-semibold hover:bg-red-100 transition-colors"
+            >
+              <Youtube className="w-4 h-4 mb-0.5 text-red-600" />
+              <span>YouTube</span>
             </a>
           </div>
 
           <a
-            href={`tel:${DISPLAY_PHONE}`}
-            className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg border border-slate-200 text-slate-700 text-xs font-medium hover:bg-white transition-colors"
+            href={GOOGLE_MAPS_SHARE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold hover:bg-blue-100 transition-colors"
           >
-            <Phone className="w-3.5 h-3.5 text-pharmacy-600" />
-            <span>Appel direct : {DISPLAY_PHONE}</span>
+            <MapPin className="w-3.5 h-3.5 text-blue-600" />
+            <span>Itinéraire Google Maps (Midelt)</span>
           </a>
+
+          <div className="grid grid-cols-2 gap-2 pt-0.5">
+            <a
+              href={`https://wa.me/${WHATSAPP_PHONE}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-xs"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>WhatsApp</span>
+            </a>
+            <a
+              href={`tel:${DISPLAY_PHONE}`}
+              className="flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg border border-slate-300 text-slate-700 text-xs font-medium hover:bg-white transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5 text-pharmacy-600" />
+              <span>Appeler</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

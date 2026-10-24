@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Truck, ShieldCheck, Clock, Instagram, PhoneCall, Gift, CheckCircle2 } from 'lucide-react';
-import { DISPLAY_PHONE, WHATSAPP_PHONE } from '../utils/whatsapp';
+import { DISPLAY_PHONE, WHATSAPP_PHONE, INSTAGRAM_URL } from '../utils/whatsapp';
 
 const ANNOUNCEMENTS = [
   {
@@ -56,13 +56,13 @@ export const AnnouncementBar: React.FC = () => {
         {/* Right: Instagram & Direct Contact */}
         <div className="hidden md:flex items-center gap-4 text-[11px] text-emerald-200 shrink-0">
           <a
-            href="https://www.instagram.com/dr.khaoulakamal"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 hover:text-white transition-colors group"
           >
             <Instagram className="w-3.5 h-3.5 text-pink-300 group-hover:scale-110 transition-transform" />
-            <span className="font-medium">@dr.khaoulakamal</span>
+            <span className="font-medium">@dr_khaoula_kamal</span>
           </a>
           <span className="text-emerald-500/60">|</span>
           <a

@@ -5,6 +5,12 @@ export const DISPLAY_PHONE = '+212 676-381441';
 export const PHARMACY_NAME = 'Pharmacie & Parapharmacie La Ville';
 export const PHARMACIST_TITLE = 'Dr. Khaoula Kamal';
 
+export const INSTAGRAM_URL = 'https://www.instagram.com/dr_khaoula_kamal/';
+export const TIKTOK_URL = 'https://www.tiktok.com/@dr.khaoula.kamal';
+export const YOUTUBE_URL = 'https://www.youtube.com/@dr_khaoula_kamal';
+export const GOOGLE_MAPS_SHARE_URL = 'https://share.google/XCsnXWqcVrtLNUDKa';
+export const PHARMACY_ADDRESS = 'Centre-Ville, Midelt, Région Drâa-Tafilalet, Maroc';
+
 /**
  * Builds the WhatsApp checkout URL from full order form data & cart items
  */

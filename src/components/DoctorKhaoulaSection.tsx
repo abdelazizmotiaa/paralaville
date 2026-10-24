@@ -1,15 +1,29 @@
-import React from 'react';
 import { 
   Stethoscope, 
   Instagram, 
+  Youtube,
   MessageCircle, 
   ShieldCheck, 
   Award, 
   Sparkles,
   MapPin,
-  Heart
+  Heart,
+  ExternalLink
 } from 'lucide-react';
-import { DISPLAY_PHONE, WHATSAPP_PHONE } from '../utils/whatsapp';
+import { 
+  DISPLAY_PHONE, 
+  WHATSAPP_PHONE, 
+  INSTAGRAM_URL, 
+  TIKTOK_URL, 
+  YOUTUBE_URL, 
+  GOOGLE_MAPS_SHARE_URL 
+} from '../utils/whatsapp';
+
+const TikTokIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.47 6.28 6.28 0 0 0 1.94-4.47V8.4a8.3 8.3 0 0 0 4.83 1.54v-3.25Z" />
+  </svg>
+);
 
 export const DoctorKhaoulaSection: React.FC = () => {
   return (
@@ -49,22 +63,56 @@ export const DoctorKhaoulaSection: React.FC = () => {
                 <p className="text-xs text-rose-300 font-extrabold uppercase tracking-wider mt-0.5">
                   Docteur en Pharmacie
                 </p>
-                <p className="text-xs text-slate-300 mt-1 flex items-center justify-center gap-1">
+                <a
+                  href={GOOGLE_MAPS_SHARE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-slate-300 hover:text-white mt-1 inline-flex items-center justify-center gap-1 group transition-colors"
+                >
                   <MapPin className="w-3.5 h-3.5 text-rose-400" />
-                  <span>Pharmacie La Ville • Midelt, Maroc</span>
-                </p>
+                  <span className="underline decoration-rose-500/50">Pharmacie La Ville • Midelt, Maroc</span>
+                  <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-white" />
+                </a>
               </div>
 
-              {/* Instagram Profile */}
-              <a
-                href="https://www.instagram.com/dr.khaoulakamal"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-semibold text-rose-200 hover:text-white transition-all group"
-              >
-                <Instagram className="w-4 h-4 text-rose-400 group-hover:scale-110 transition-transform" />
-                <span>@dr.khaoulakamal</span>
-              </a>
+              {/* Official Social Media Channels (Instagram, TikTok, YouTube) */}
+              <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
+                {/* Instagram */}
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white text-xs font-bold shadow-xs active:scale-95 transition-all"
+                  title="Instagram officiel : @dr_khaoula_kamal"
+                >
+                  <Instagram className="w-3.5 h-3.5" />
+                  <span>@dr_khaoula_kamal</span>
+                </a>
+
+                {/* TikTok */}
+                <a
+                  href={TIKTOK_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 hover:bg-black border border-white/20 text-white text-xs font-bold shadow-xs active:scale-95 transition-all"
+                  title="TikTok officiel : @dr.khaoula.kamal"
+                >
+                  <TikTokIcon className="w-3.5 h-3.5" />
+                  <span>TikTok</span>
+                </a>
+
+                {/* YouTube */}
+                <a
+                  href={YOUTUBE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold shadow-xs active:scale-95 transition-all"
+                  title="Chaîne YouTube Dr. Khaoula Kamal"
+                >
+                  <Youtube className="w-3.5 h-3.5" />
+                  <span>YouTube</span>
+                </a>
+              </div>
             </div>
 
             {/* Right: Minimalist & Direct Message */}
