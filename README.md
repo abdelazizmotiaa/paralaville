@@ -60,7 +60,7 @@ Bonjour Dr. Khaoula / Pharmacie La Ville, je souhaite commander :
 ### 6. Optimisation Smartphone (Mobile-First)
 - Barre de navigation inférieure fixe (style application native) avec accès direct à l'accueil, aux rayons, à l'appareil photo ordonnance, au panier et au WhatsApp direct.
 - Bouton flottant WhatsApp avec pulsation et bulle de bienvenue interactive.
-- Menu tiroir latéral (Drawer) fluide avec profil du Dr. Khaoula Kamal et lien Instagram officiel (`@dr.khaoulakamal`).
+- Menu tiroir latéral (Drawer) fluide avec profil du Dr. Khaoula Kamal et lien Instagram officiel (`@dr_khaoula_kamal`).
 
 ---
 
