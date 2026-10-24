@@ -33,11 +33,13 @@ const TikTokIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 interface FooterProps {
   onSelectCategory: (cat: string) => void;
   onOpenPrescriptionModal: () => void;
+  onOpenPharmacistModal?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onSelectCategory,
   onOpenPrescriptionModal,
+  onOpenPharmacistModal,
 }) => {
   return (
     <footer className="bg-slate-950 text-white pt-12 pb-16 sm:pb-12 border-t border-slate-800">
@@ -207,6 +209,17 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <span>🏥 Service de garde et urgences Midelt</span>
               </li>
+              {onOpenPharmacistModal && (
+                <li className="pt-2 border-t border-slate-800">
+                  <button
+                    onClick={onOpenPharmacistModal}
+                    className="flex items-center gap-1.5 text-xs text-rose-300 hover:text-white font-bold transition-colors"
+                  >
+                    <ShieldCheck className="w-3.5 h-3.5 text-rose-400" />
+                    <span>Espace Titulaire • Dr. Khaoula (Ajouter Produits)</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 

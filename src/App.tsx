@@ -42,6 +42,7 @@ import { TrustBadgesSection } from './components/TrustBadgesSection';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { Footer } from './components/Footer';
+import { PharmacistPortalModal } from './components/PharmacistPortalModal';
 
 export const App: React.FC = () => {
   // Cart state with localStorage persistence
@@ -68,8 +69,54 @@ export const App: React.FC = () => {
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isPrescriptionModalOpen, setIsPrescriptionModalOpen] = useState(false);
   const [isDiagnosticModalOpen, setIsDiagnosticModalOpen] = useState(false);
+  const [isPharmacistModalOpen, setIsPharmacistModalOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [quickOrderProduct, setQuickOrderProduct] = useState<Product | null>(null);
+
+  // Dynamic products state with localStorage persistence
+  const [products, setProducts] = useState<Product[]>(() => {
+    try {
+      const saved = localStorage.getItem('paralaville_custom_products');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch {
+      // safe fallback
+    }
+    return PRODUCTS;
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('paralaville_custom_products', JSON.stringify(products));
+    } catch {
+      // safe fallback
+    }
+  }, [products]);
+
+  const handleAddProduct = (newProduct: Product) => {
+    setProducts((prev) => [newProduct, ...prev]);
+  };
+
+  const handleUpdateProduct = (updatedProduct: Product) => {
+    setProducts((prev) =>
+      prev.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
+    );
+  };
+
+  const handleDeleteProduct = (productId: string) => {
+    setProducts((prev) => prev.filter((p) => p.id !== productId));
+  };
+
+  const handleResetProducts = () => {
+    setProducts(PRODUCTS);
+    try {
+      localStorage.removeItem('paralaville_custom_products');
+    } catch {}
+  };
 
   // Filters & Search state
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -129,7 +176,7 @@ export const App: React.FC = () => {
 
   // Filtered and sorted products
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       // Category match
       if (selectedCategory !== 'all') {
         if (selectedCategory === 'destockage' && product.category !== 'destockage' && product.badge !== 'destockage') {
@@ -176,7 +223,7 @@ export const App: React.FC = () => {
 
   // Flash products for countdown widget
   const flashProducts = useMemo(() => {
-    return PRODUCTS.filter(
+    return products.filter(
       (p) => p.badge === 'destockage' || p.badge === 'promo' || (p.discountPercent && p.discountPercent >= 24)
     );
   }, []);
@@ -193,10 +240,12 @@ export const App: React.FC = () => {
       {/* 2. Sticky Mobile-First Header */}
       <Header
         cartCount={totalCartCount}
+        products={products}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenMobileDrawer={() => setIsMobileDrawerOpen(true)}
         onOpenPrescriptionModal={() => setIsPrescriptionModalOpen(true)}
         onOpenDiagnosticModal={() => setIsDiagnosticModalOpen(true)}
+        onOpenPharmacistModal={() => setIsPharmacistModalOpen(true)}
         onQuickViewProduct={(p) => setQuickViewProduct(p)}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
@@ -212,6 +261,7 @@ export const App: React.FC = () => {
         onSelectCategory={setSelectedCategory}
         onOpenPrescriptionModal={() => setIsPrescriptionModalOpen(true)}
         onOpenDiagnosticModal={() => setIsDiagnosticModalOpen(true)}
+        onOpenPharmacistModal={() => setIsPharmacistModalOpen(true)}
         onScrollToSection={scrollToSection}
         selectedCategory={selectedCategory}
       />
@@ -247,6 +297,7 @@ export const App: React.FC = () => {
 
         {/* 7b. Winning Promo Packs & Duo Specials Section */}
         <PromoPacksSection
+          products={products}
           onAddToCart={(p) => handleAddToCart(p, 1)}
           onQuickOrder={(p) => setQuickOrderProduct(p)}
           onQuickView={(p) => setQuickViewProduct(p)}
@@ -329,7 +380,7 @@ export const App: React.FC = () => {
                   : 'bg-white text-slate-700 border border-slate-200'
               }`}
             >
-              Tous ({PRODUCTS.length})
+              Tous ({products.length})
             </button>
             <button
               onClick={() => setSelectedCategory('destockage')}
@@ -455,6 +506,7 @@ export const App: React.FC = () => {
           if (el) el.scrollIntoView({ behavior: 'smooth' });
         }}
         onOpenPrescriptionModal={() => setIsPrescriptionModalOpen(true)}
+        onOpenPharmacistModal={() => setIsPharmacistModalOpen(true)}
       />
 
       {/* 15. Persistent Floating WhatsApp Button & Real-Time Sales Toast */}
@@ -476,6 +528,16 @@ export const App: React.FC = () => {
       />
 
       {/* Modals */}
+      <PharmacistPortalModal
+        isOpen={isPharmacistModalOpen}
+        onClose={() => setIsPharmacistModalOpen(false)}
+        products={products}
+        onAddProduct={handleAddProduct}
+        onUpdateProduct={handleUpdateProduct}
+        onDeleteProduct={handleDeleteProduct}
+        onResetProducts={handleResetProducts}
+      />
+
       <ProductQuickViewModal
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}

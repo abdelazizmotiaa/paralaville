@@ -16,7 +16,8 @@ import {
   Sun, 
   Scissors,
   CheckCircle2,
-  ChevronRight
+  ChevronRight,
+  ShieldCheck
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { 
@@ -40,6 +41,7 @@ interface MobileDrawerProps {
   onSelectCategory: (categoryId: string) => void;
   onOpenPrescriptionModal: () => void;
   onOpenDiagnosticModal?: () => void;
+  onOpenPharmacistModal?: () => void;
   onScrollToSection: (sectionId: string) => void;
   selectedCategory: string;
 }
@@ -50,6 +52,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   onSelectCategory,
   onOpenPrescriptionModal,
   onOpenDiagnosticModal,
+  onOpenPharmacistModal,
   onScrollToSection,
   selectedCategory,
 }) => {
@@ -293,6 +296,22 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             </div>
             <ChevronRight className="w-4 h-4 text-slate-400" />
           </button>
+
+          {onOpenPharmacistModal && (
+            <button
+              onClick={() => {
+                onClose();
+                onOpenPharmacistModal();
+              }}
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-rose-900 bg-rose-50 border border-rose-200/80 hover:bg-rose-100 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <ShieldCheck className="w-4 h-4 text-rose-600" />
+                <span>Espace Titulaire (Ajouter Produits)</span>
+              </div>
+              <ChevronRight className="w-4 h-4 text-rose-500" />
+            </button>
+          )}
         </div>
 
         {/* Drawer Footer: Doctor & Instagram */}

@@ -16,18 +16,21 @@ import { PRODUCTS } from '../data/products';
 import { buildSingleProductWhatsAppUrl } from '../utils/whatsapp';
 
 interface PromoPacksSectionProps {
+  products?: Product[];
   onAddToCart: (product: Product) => void;
   onQuickOrder: (product: Product) => void;
   onQuickView: (product: Product) => void;
 }
 
 export const PromoPacksSection: React.FC<PromoPacksSectionProps> = ({
+  products,
   onAddToCart,
   onQuickOrder,
   onQuickView,
 }) => {
   // Filter pack products
-  const packProducts = PRODUCTS.filter((p) => p.isPack || p.category === 'packs-promo' || p.badge === 'destockage').slice(0, 4);
+  const list = products || PRODUCTS;
+  const packProducts = list.filter((p) => p.isPack || p.category === 'packs-promo' || p.badge === 'destockage').slice(0, 4);
 
   return (
     <section className="py-10 sm:py-14 bg-gradient-to-b from-amber-50/70 via-white to-slate-50 border-y border-amber-200/70">

@@ -10,7 +10,8 @@ import {
   ChevronDown,
   Stethoscope,
   ArrowRight,
-  Instagram
+  Instagram,
+  ShieldCheck
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { WHATSAPP_PHONE, INSTAGRAM_URL } from '../utils/whatsapp';
@@ -19,10 +20,12 @@ import { Product } from '../types';
 
 interface HeaderProps {
   cartCount: number;
+  products?: Product[];
   onOpenCart: () => void;
   onOpenMobileDrawer: () => void;
   onOpenPrescriptionModal: () => void;
   onOpenDiagnosticModal: () => void;
+  onOpenPharmacistModal: () => void;
   onQuickViewProduct: (product: Product) => void;
   searchQuery: string;
   onSearchChange: (query: string) => void;
@@ -33,10 +36,12 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({
   cartCount,
+  products,
   onOpenCart,
   onOpenMobileDrawer,
   onOpenPrescriptionModal,
   onOpenDiagnosticModal,
+  onOpenPharmacistModal,
   onQuickViewProduct,
   searchQuery,
   onSearchChange,
@@ -60,8 +65,9 @@ export const Header: React.FC<HeaderProps> = ({
   }, []);
 
   // Filtered search results for live autocomplete (limit to top 4 products)
+  const productList = products || PRODUCTS;
   const searchResults = searchQuery.trim().length > 1
-    ? PRODUCTS.filter((p) => {
+    ? productList.filter((p) => {
         const q = searchQuery.toLowerCase().trim();
         return (
           p.title.toLowerCase().includes(q) ||
@@ -251,6 +257,16 @@ export const Header: React.FC<HeaderProps> = ({
               <Instagram className="w-4 h-4 shrink-0" />
               <span className="hidden xl:inline">Instagram</span>
             </a>
+
+            {/* Pharmacist Owner Portal CTA */}
+            <button
+              onClick={onOpenPharmacistModal}
+              className="hidden lg:flex items-center gap-1.5 px-3 py-2 rounded-full bg-slate-900 hover:bg-rose-950 text-white text-xs font-bold active:scale-95 transition-all shadow-xs group border border-slate-700"
+              title="Espace Dr. Khaoula Kamal : Ajouter des produits & gérer le catalogue"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-rose-400 group-hover:scale-110 transition-transform" />
+              <span>Espace Titulaire</span>
+            </button>
 
             {/* Shopping Cart Drawer Trigger */}
             <button
