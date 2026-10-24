@@ -9,10 +9,11 @@ import {
   Sparkles,
   ChevronDown,
   Stethoscope,
-  ArrowRight
+  ArrowRight,
+  Instagram
 } from 'lucide-react';
 import { Logo } from './Logo';
-import { WHATSAPP_PHONE } from '../utils/whatsapp';
+import { WHATSAPP_PHONE, INSTAGRAM_URL } from '../utils/whatsapp';
 import { PRODUCTS } from '../data/products';
 import { Product } from '../types';
 
@@ -237,6 +238,18 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <MessageCircle className="w-4 h-4 fill-current shrink-0" />
               <span className="hidden lg:inline">WhatsApp</span>
+            </a>
+
+            {/* Instagram Quick Link */}
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white text-xs font-semibold shadow-xs hover:shadow-md active:scale-95 transition-all"
+              title="Instagram Dr. Khaoula Kamal (@dr_khaoula_kamal)"
+            >
+              <Instagram className="w-4 h-4 shrink-0" />
+              <span className="hidden xl:inline">Instagram</span>
             </a>
 
             {/* Shopping Cart Drawer Trigger */}
