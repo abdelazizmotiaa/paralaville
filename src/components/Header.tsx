@@ -299,13 +299,24 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={() => onSelectCategory('destockage')}
-              className={`px-3 py-1.5 rounded-full font-bold flex items-center gap-1 transition-colors ${
+              className={`px-3.5 py-1.5 rounded-full font-black flex items-center gap-1 transition-all ${
                 selectedCategory === 'destockage'
-                  ? 'bg-red-600 text-white shadow-xs'
-                  : 'text-red-600 hover:bg-red-50'
+                  ? 'bg-red-600 text-white shadow-md ring-2 ring-red-400'
+                  : 'text-red-600 bg-red-50 hover:bg-red-100'
               }`}
             >
-              <span>🏷️ Déstockage -50%</span>
+              <span>🔥 SOLDES JUSQU'À -50%</span>
+            </button>
+
+            <button
+              onClick={() => onSelectCategory('complements')}
+              className={`px-3.5 py-1.5 rounded-full font-bold flex items-center gap-1 transition-all ${
+                selectedCategory === 'complements'
+                  ? 'bg-rose-600 text-white shadow-sm ring-2 ring-rose-400'
+                  : 'text-rose-700 bg-rose-50 hover:bg-rose-100'
+              }`}
+            >
+              <span>✨ Compléments & Beauté</span>
             </button>
 
             <button
@@ -316,25 +327,25 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'text-amber-700 hover:bg-amber-50'
               }`}
             >
-              <span>📦 Packs Promo</span>
+              <span>📦 Packs Duo Éco</span>
             </button>
 
             <button
               onClick={() => onSelectCategory('dermo-cosmetique')}
               className={`px-3 py-1.5 rounded-full font-medium transition-colors ${
                 selectedCategory === 'dermo-cosmetique'
-                  ? 'bg-pharmacy-700 text-white shadow-xs'
+                  ? 'bg-slate-900 text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
               }`}
             >
-              Dermo-Cosmétique
+              Visage & Anti-Taches
             </button>
 
             <button
               onClick={() => onSelectCategory('solaires')}
               className={`px-3 py-1.5 rounded-full font-medium transition-colors ${
                 selectedCategory === 'solaires'
-                  ? 'bg-pharmacy-700 text-white shadow-xs'
+                  ? 'bg-slate-900 text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
               }`}
             >
@@ -345,22 +356,11 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onSelectCategory('bebe-maternite')}
               className={`px-3 py-1.5 rounded-full font-medium transition-colors ${
                 selectedCategory === 'bebe-maternite'
-                  ? 'bg-pharmacy-700 text-white shadow-xs'
+                  ? 'bg-slate-900 text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
               }`}
             >
-              Bébé & Maternité
-            </button>
-
-            <button
-              onClick={() => onSelectCategory('complements')}
-              className={`px-3 py-1.5 rounded-full font-medium transition-colors ${
-                selectedCategory === 'complements'
-                  ? 'bg-pharmacy-700 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
-              }`}
-            >
-              Compléments & Bien-être
+              Bébé & Maman
             </button>
 
             <button

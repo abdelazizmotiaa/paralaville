@@ -42,7 +42,7 @@ export const Logo: React.FC<LogoProps> = ({ className = '', variant = 'full' }) 
           }`}>
             LA VILLE
           </span>
-          <span className="text-[10px] sm:text-[11px] font-bold px-1.5 py-0.5 rounded bg-pharmacy-100 text-pharmacy-800 tracking-wider uppercase border border-pharmacy-200">
+          <span className="text-[10px] sm:text-[11px] font-bold px-1.5 py-0.5 rounded bg-rose-100 text-rose-800 tracking-wider uppercase border border-rose-200">
             PARA
           </span>
         </div>

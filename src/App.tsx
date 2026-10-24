@@ -33,6 +33,7 @@ import { PrescriptionModal } from './components/PrescriptionModal';
 import { SkinDiagnosticModal } from './components/SkinDiagnosticModal';
 import { QuickOrderModal } from './components/QuickOrderModal';
 import { PromoPacksSection } from './components/PromoPacksSection';
+import { MoroccoDeliveryCoverage } from './components/MoroccoDeliveryCoverage';
 import { LiveSalesToast } from './components/LiveSalesToast';
 import { CustomerReviewsSection } from './components/CustomerReviewsSection';
 import { DoctorKhaoulaSection } from './components/DoctorKhaoulaSection';
@@ -356,16 +357,19 @@ export const App: React.FC = () => {
 
         </section>
 
-        {/* 10. Doctor Khaoula Kamal Section */}
+        {/* 10. National Geographical Morocco Delivery Coverage */}
+        <MoroccoDeliveryCoverage />
+
+        {/* 11. Doctor Khaoula Kamal Section */}
         <DoctorKhaoulaSection />
 
-        {/* 11. Moroccan Customer Verified Reviews */}
+        {/* 12. Moroccan Customer Verified Reviews */}
         <CustomerReviewsSection />
 
-        {/* 12. Midelt Pharmacy & Service de Garde */}
+        {/* 13. Midelt Pharmacy & Service de Garde */}
         <MideltPharmacySection />
 
-        {/* 13. Trust Badges Section */}
+        {/* 14. Trust Badges Section */}
         <TrustBadgesSection />
       </main>
 

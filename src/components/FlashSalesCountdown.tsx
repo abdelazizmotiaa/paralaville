@@ -50,15 +50,15 @@ export const FlashSalesCountdown: React.FC<FlashSalesCountdownProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-red-600 text-white tracking-wider animate-pulse">
-                VENTE FLASH DU JOUR
+              <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-red-600 text-white tracking-wider animate-pulse">
+                🔥 VENTES FLASH DU JOUR
               </span>
-              <span className="text-xs text-amber-900 font-semibold hidden sm:inline">
-                • Stocks Limités
+              <span className="text-xs text-red-700 font-extrabold hidden sm:inline">
+                • Réductions Immédiates
               </span>
             </div>
-            <h3 className="text-base sm:text-xl font-extrabold text-slate-900 mt-0.5">
-              Jusqu'à -47% sur les Solaires, Sérums & Soins Culte
+            <h3 className="text-base sm:text-xl font-black text-slate-900 mt-0.5">
+              Jusqu'à -50% sur les Compléments, Solaires & Soins Culte
             </h3>
           </div>
         </div>
